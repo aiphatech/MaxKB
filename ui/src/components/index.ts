@@ -1,5 +1,7 @@
 import { type App } from 'vue'
 import AppIcon from './icons/AppIcon.vue'
+import TextInput from './dynamics-form/items/TextInput.vue'
+import PasswordInput from './dynamics-form/items/PasswordInput.vue'
 import AppAvatar from './app-avatar/index.vue'
 import LoginLayout from './login-layout/index.vue'
 import LoginContainer from './login-container/index.vue'
@@ -28,31 +30,32 @@ import ModelSelect from './model-select/index.vue'
 
 export default {
   install(app: App) {
-    app.component(AppIcon.name, AppIcon)
-    app.component(AppAvatar.name, AppAvatar)
-    app.component(LoginLayout.name, LoginLayout)
-    app.component(LoginContainer.name, LoginContainer)
-    app.component(LayoutContainer.name, LayoutContainer)
-    app.component(TagsInput.name, TagsInput)
-    app.component(CardBox.name, CardBox)
-    app.component(CardAdd.name, CardAdd)
-    app.component(BackButton.name, BackButton)
-    app.component(AppTable.name, AppTable)
-    app.component(ReadWrite.name, ReadWrite)
-    app.component(TagEllipsis.name, TagEllipsis)
-    app.component(CommonList.name, CommonList)
-    app.use(dynamicsForm)
-    app.component(CardCheckbox.name, CardCheckbox)
-    app.component(AiChat.name, AiChat)
-    app.component(InfiniteScroll.name, InfiniteScroll)
-    app.component(AutoTooltip.name, AutoTooltip)
-    app.component(MdPreview.name, MdPreview)
-    app.component(MdEditor.name, MdEditor)
-    app.component(LogoFull.name, LogoFull)
-    app.component(LogoIcon.name, LogoIcon)
-    app.component(SendIcon.name, SendIcon)
-    app.component(CodemirrorEditor.name, CodemirrorEditor)
-    app.component(MdEditorMagnify.name, MdEditorMagnify)
-    app.component(ModelSelect.name, ModelSelect)
+    app.component('AppIcon', AppIcon)
+    app.component('TextInput', TextInput)
+    app.component('PasswordInput', PasswordInput)
+    app.component('AppAvatar', AppAvatar)
+    app.component('LoginLayout', LoginLayout)
+    app.component('LoginContainer', LoginContainer)
+    app.component('LayoutContainer', LayoutContainer)
+    app.component('TagsInput', TagsInput)
+    app.component('CardBox', CardBox)
+    app.component('CardAdd', CardAdd)
+    app.component('BackButton', BackButton)
+    app.component('AppTable', AppTable)
+    app.component('ReadWrite', ReadWrite)
+    app.component('TagEllipsis', TagEllipsis)
+    app.component('CommonList', CommonList)
+    app.component('CardCheckbox', CardCheckbox)
+    app.component('AiChat', AiChat)
+    app.component('InfiniteScroll', InfiniteScroll)
+    app.component('AutoTooltip', AutoTooltip)
+    app.component('MdPreview', MdPreview)
+    app.component('MdEditor', MdEditor)
+    app.component('LogoFull', LogoFull)
+    app.component('LogoIcon', LogoIcon)
+    app.component('SendIcon', SendIcon)
+    app.component('CodemirrorEditor', CodemirrorEditor)
+    app.component('MdEditorMagnify', MdEditorMagnify)
+    app.component('ModelSelect', ModelSelect)
   }
 }

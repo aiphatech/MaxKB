@@ -1,11 +1,11 @@
-FROM ghcr.io/1panel-dev/maxkb-vector-model:v1.0.1 AS vector-model
+FROM ghcr.nju.edu.cn/1panel-dev/maxkb-vector-model:v1.0.1 AS vector-model
 FROM node:18-alpine3.18 AS web-build
 COPY ui ui
 RUN cd ui && \
     npm install && \
     npm run build && \
     rm -rf ./node_modules
-FROM ghcr.io/1panel-dev/maxkb-python-pg:python3.11-pg15.8 AS stage-build
+FROM ghcr.nju.edu.cn/1panel-dev/maxkb-python-pg:python3.11-pg15.8 AS stage-build
 
 ARG DEPENDENCIES="                    \
         python3-pip"
@@ -25,11 +25,10 @@ RUN python3 -m venv /opt/py3 && \
     pip install poetry==1.8.5 --break-system-packages && \
     poetry config virtualenvs.create false && \
     . /opt/py3/bin/activate && \
-    if [ "$(uname -m)" = "x86_64" ]; then sed -i 's/^torch.*/torch = {version = "^2.2.1+cpu", source = "pytorch"}/g' pyproject.toml; fi && \
     poetry install && \
     export MAXKB_CONFIG_TYPE=ENV && python3 /opt/maxkb/app/apps/manage.py compilemessages
 
-FROM ghcr.io/1panel-dev/maxkb-python-pg:python3.11-pg15.8
+FROM ghcr.nju.edu.cn/1panel-dev/maxkb-python-pg:python3.11-pg15.8
 ARG DOCKER_IMAGE_TAG=dev \
     BUILD_AT \
     GITHUB_COMMIT
@@ -40,7 +39,7 @@ ENV MAXKB_VERSION="${DOCKER_IMAGE_TAG} (build at ${BUILD_AT}, commit: ${GITHUB_C
     MAXKB_DB_HOST=127.0.0.1 \
     MAXKB_DB_PORT=5432  \
     MAXKB_DB_USER=root \
-    MAXKB_DB_PASSWORD=Password123@postgres \
+    MAXKB_DB_PASSWORD=asdf \
     MAXKB_DB_MAX_OVERFLOW=80 \
     MAXKB_EMBEDDING_MODEL_NAME=/opt/maxkb/model/embedding/shibing624_text2vec-base-chinese \
     MAXKB_EMBEDDING_MODEL_PATH=/opt/maxkb/model/embedding \
@@ -48,7 +47,7 @@ ENV MAXKB_VERSION="${DOCKER_IMAGE_TAG} (build at ${BUILD_AT}, commit: ${GITHUB_C
     LANG=en_US.UTF-8 \
     PATH=/opt/py3/bin:$PATH \
     POSTGRES_USER=root \
-    POSTGRES_PASSWORD=Password123@postgres \
+    POSTGRES_PASSWORD=asdf \
     POSTGRES_MAX_CONNECTIONS=1000 \
     PIP_TARGET=/opt/maxkb/app/sandbox/python-packages \
     PYTHONPATH=/opt/maxkb/app/sandbox/python-packages \

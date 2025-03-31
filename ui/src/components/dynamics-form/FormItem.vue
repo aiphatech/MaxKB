@@ -7,15 +7,29 @@
     :rules="rules"
   >
     <template #label v-if="formfield.label">
-      <FormItemLabel v-if="isString(formfield.label)" :form-field="formfield"></FormItemLabel>
+      <FormItemLabel v-if="isString(formfield.label)" :form-field="formfield">{{ formfield.label.label}}</FormItemLabel>
       <component
         v-else
         :is="formfield.label.input_type"
         :label="formfield.label.label"
         v-bind="label_attrs"
-      ></component>
+      >{{ formfield.label.label }}</component>
     </template>
+    <el-slider
+      v-if="formfield.input_type === 'Slider'"
+      v-model="itemValue"
+      class="full-width-slider"
+      v-bind="attrs"
+      :min="attrs.min"
+      :max="attrs.max"
+      :step="attrs.step"
+      :show-input="attrs['show-input']"
+      :show-input-controls="attrs['show-input-controls']"
+      :format-tooltip="(value: number) => value.toFixed(attrs.precision || 0)"
+      style="width: 100%; margin-top: 12px;"
+    />
     <component
+      v-else
       ref="componentFormRef"
       :view="view"
       v-model="itemValue"
@@ -181,4 +195,22 @@ const validate = () => {
 }
 defineExpose({ validate })
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.full-width-slider {
+  width: 100%;
+  
+  :deep(.el-slider) {
+    display: flex;
+    align-items: center;
+    
+    .el-slider__runway {
+      flex: 1;
+      margin-right: 12px;
+    }
+    
+    .el-slider__input {
+      width: 100px;
+    }
+  }
+}
+</style>

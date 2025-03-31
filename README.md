@@ -64,3 +64,29 @@ Licensed under The GNU General Public License version 3 (GPLv3)  (the "License")
 <https://www.gnu.org/licenses/gpl-3.0.html>
 
 Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+
+
+# 启动项目
+
+## 前端服务启动
+```
+nvm use 18 && cd ui && npm run dev
+```
+
+## 后端服务启动
+```
+conda activate maxkb && cd apps && python manage.py runserver 0.0.0.0:8000
+```
+
+
+# 打包命令
+
+```
+docker build -t aipha_ai:latest -f installer/Dockerfile .
+
+docker save aipha_ai:latest | gzip > aipha_ai.tar.gz
+docker load < aipha_ai.tar.gz
+
+docker run -d --restart=always -p 8081:8080 -p 5433:5432  aipha_ai:latest
+
+```
